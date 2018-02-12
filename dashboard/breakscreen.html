@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+  </script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="first" type="text" class="validate" value="...">
+          <label for="first" class="active">First speaker</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="second" type="text" class="validate" value="...">
+          <label for="second" class="active">Second speaker</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="third" type="text" class="validate" value="...">
+          <label for="third" class="active">Third speaker</label>
+        </div>
+      </div>
+      <!--
+      <div class="row">
+        <div class="col s12">
+          This is an inline input field:
+          <div class="input-field inline">
+            <input id="email" type="email" class="validate">
+            <label for="email" data-error="wrong" data-success="right">Email</label>
+          </div>
+        </div>
+      </div>
+      -->
+    </form>
+  </div>
+  <script>
+    $(document).ready(function() {
+      const first = nodecg.Replicant('first');
+      const second = nodecg.Replicant('second');
+      const third = nodecg.Replicant('third');
+
+      // this loads the data from backend:
+      first.on('change', newVal => document.getElementById('first').value = newVal);
+      second.on('change', newVal => document.getElementById('second').value = newVal);
+      third.on('change', newVal => document.getElementById('third').value = newVal);
+
+      // this sends new data to the backend:
+      const idMap = { first, second, third };
+      document.addEventListener('input', ev => {
+        let replicant = idMap[ev.srcElement.id];
+        if (replicant) {
+          // console.log(ev.srcElement.id, ev.srcElement.value);
+          replicant.value = ev.srcElement.value;
+        }
+      });
+
+      // Make sure materialize understands that we filled inn the inputs fields:
+      // Materialize.updateTextFields();
+    });
+  </script>
+</body>
+</html>

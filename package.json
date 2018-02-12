@@ -1,0 +1,40 @@
+{
+  "name": "testylicious",
+  "version": "0.0.0",
+  "description": "Dynamic broadcast graphics rendered in a browser",
+  "homepage": "http://nodecg.com/",
+  "author": {
+    "name": "sce",
+    "email": "christoffer@eliesen.no",
+    "url": "github.com/sce"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "~0.9.0",
+    "dashboardPanels": [
+      {
+        "name": "breakscreen",
+        "title": "Breakscreen",
+        "width": 4,
+        "file": "breakscreen.html",
+        "headerColor": "#9f9bbd"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git"
+}
