@@ -32,8 +32,20 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
+          <input id="first_pres" type="text" class="validate" value="...">
+          <label for="first_pres" class="active">First presentation title</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
           <input id="second" type="text" class="validate" value="...">
           <label for="second" class="active">Second speaker</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="second_pres" type="text" class="validate" value="...">
+          <label for="second_pres" class="active">Second presentation title</label>
         </div>
       </div>
       <div class="row">
@@ -42,36 +54,36 @@
           <label for="third" class="active">Third speaker</label>
         </div>
       </div>
-      <!--
       <div class="row">
-        <div class="col s12">
-          This is an inline input field:
-          <div class="input-field inline">
-            <input id="email" type="email" class="validate">
-            <label for="email" data-error="wrong" data-success="right">Email</label>
-          </div>
+        <div class="input-field col s12">
+          <input id="third_pres" type="text" class="validate" value="...">
+          <label for="third_pres" class="active">Third presentation title</label>
         </div>
       </div>
-      -->
     </form>
   </div>
   <script>
     $(document).ready(function() {
       const first = nodecg.Replicant('first');
+      const first_pres = nodecg.Replicant('first_pres');
       const second = nodecg.Replicant('second');
+      const second_pres = nodecg.Replicant('second_pres');
       const third = nodecg.Replicant('third');
+      const third_pres = nodecg.Replicant('third_pres');
 
       // this loads the data from backend:
       first.on('change', newVal => document.getElementById('first').value = newVal);
+      first_pres.on('change', newVal => document.getElementById('first_pres').value = newVal);
       second.on('change', newVal => document.getElementById('second').value = newVal);
+      second_pres.on('change', newVal => document.getElementById('second_pres').value = newVal);
       third.on('change', newVal => document.getElementById('third').value = newVal);
+      third_pres.on('change', newVal => document.getElementById('third_pres').value = newVal);
 
       // this sends new data to the backend:
-      const idMap = { first, second, third };
+      const idMap = { first, second, third, first_pres, second_pres, third_pres };
       document.addEventListener('input', ev => {
         let replicant = idMap[ev.srcElement.id];
         if (replicant) {
-          // console.log(ev.srcElement.id, ev.srcElement.value);
           replicant.value = ev.srcElement.value;
         }
       });

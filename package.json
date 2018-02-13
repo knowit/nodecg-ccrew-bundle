@@ -26,13 +26,6 @@
         "width": 4,
         "file": "breakscreen.html",
         "headerColor": "#9f9bbd"
-      },
-      {
-        "name": "breakscreen-2",
-        "title": "Breakscreen",
-        "width": 4,
-        "file": "breakscreen-2.html",
-        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [
