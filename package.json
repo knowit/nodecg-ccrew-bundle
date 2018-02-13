@@ -23,7 +23,7 @@
       {
         "name": "breakscreen",
         "title": "Breakscreen",
-        "width": 4,
+        "width": 8,
         "file": "breakscreen.html",
         "headerColor": "#9f9bbd"
       }

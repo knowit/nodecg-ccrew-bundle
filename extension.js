@@ -2,7 +2,7 @@
 
 module.exports = function (nodecg) {
 
-  const event_title = nodecg.Replicant('event_title', {defaultValue: 'default from server', persistent: true});
+  const event_title = nodecg.Replicant('event_title', {defaultValue: '', persistent: true});
 
   const first = nodecg.Replicant('first', {defaultValue: '', persistent: true});
   const first_pres = nodecg.Replicant('first_pres', {defaultValue: '', persistent: true});
