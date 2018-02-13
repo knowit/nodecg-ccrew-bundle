@@ -2,8 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      p {
+        color: white;
+        font-weight: bold;
+      }
+      #bg {
+        width: 1920px;
+        /* height: 1076px; */
+        height: 1080px;
+      }
+      #fullscreen {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        /* overflow: hidden; */
+        /* background-color: lightblue; */
+      }
+      #titles {
+        /* background-color: red; */
+        margin-top: 20%;
+        margin-left: 20%;
+        font-size: 4em;
+      }
+    </style>
 </head>
 <body>
-
+  <img id="bg" src="./blue1.png"/>
+  <div id="fullscreen">
+    <div id="titles">
+      <p id="first">...</p>
+      <p id="second">...</p>
+      <p id="third">...</p>
+    </div>
+  </div>
+  <script src="app/index.js"></script>
 </body>
 </html>
