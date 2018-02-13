@@ -2,12 +2,14 @@
 
 module.exports = function (nodecg) {
 
+  const event_title = nodecg.Replicant('event_title', {defaultValue: 'default from server', persistent: true});
+
   const first = nodecg.Replicant('first', {defaultValue: '', persistent: true});
-  const first_pres = nodecg.Replicant('first', {defaultValue: '', persistent: true});
+  const first_pres = nodecg.Replicant('first_pres', {defaultValue: '', persistent: true});
   const second = nodecg.Replicant('second', {defaultValue: '', persistent: true});
-  const second_pres = nodecg.Replicant('second', {defaultValue: '', persistent: true});
+  const second_pres = nodecg.Replicant('second_pres', {defaultValue: '', persistent: true});
   const third = nodecg.Replicant('third', {defaultValue: '', persistent: true});
-  const third_pres = nodecg.Replicant('third', {defaultValue: '', persistent: true});
+  const third_pres = nodecg.Replicant('third_pres', {defaultValue: '', persistent: true});
 
   // const running = nodecg.Replicant('countdownRunning', {defaultValue: false, persistent: false});
 

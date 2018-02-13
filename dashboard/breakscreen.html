@@ -26,6 +26,12 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
+          <input id="event_title" type="text" class="validate" value="???">
+          <label for="event_title" class="active">Event Title</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
           <input id="first" type="text" class="validate" value="...">
           <label for="first" class="active">First speaker</label>
         </div>
@@ -64,6 +70,8 @@
   </div>
   <script>
     $(document).ready(function() {
+      const event_title = nodecg.Replicant('event_title');
+
       const first = nodecg.Replicant('first');
       const first_pres = nodecg.Replicant('first_pres');
       const second = nodecg.Replicant('second');
@@ -72,6 +80,8 @@
       const third_pres = nodecg.Replicant('third_pres');
 
       // this loads the data from backend:
+      event_title.on('change', newVal => document.getElementById('event_title').value = newVal);
+
       first.on('change', newVal => document.getElementById('first').value = newVal);
       first_pres.on('change', newVal => document.getElementById('first_pres').value = newVal);
       second.on('change', newVal => document.getElementById('second').value = newVal);
@@ -80,7 +90,7 @@
       third_pres.on('change', newVal => document.getElementById('third_pres').value = newVal);
 
       // this sends new data to the backend:
-      const idMap = { first, second, third, first_pres, second_pres, third_pres };
+      const idMap = { first, second, third, first_pres, second_pres, third_pres, event_title };
       document.addEventListener('input', ev => {
         let replicant = idMap[ev.srcElement.id];
         if (replicant) {
