@@ -26,6 +26,13 @@
         "width": 8,
         "file": "breakscreen.html",
         "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "presenter-overlay",
+        "title": "Presenter Overlay",
+        "width": 4,
+        "file": "presenter-overlay.html",
+        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [
@@ -36,6 +43,11 @@
       },
       {
         "file": "breakscreen2.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "presenter-overlay",
         "width": 1920,
         "height": 1080
       }
