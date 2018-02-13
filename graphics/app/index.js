@@ -14,8 +14,10 @@
 
   console.log("index.js GO!", event_title, first);
 
+  const fadeIn = () => document.getElementById('text').style.opacity = "1";
+
   setTimeout(() => {
-    event_title.on('change', newVal => document.getElementById('event_title').innerText = safe(newVal));
+    event_title.on('change', newVal => { fadeIn(); document.getElementById('event_title').innerText = safe(newVal)});
 
     first.on('change', newVal => document.getElementById('first').innerText = safe(newVal));
     first_pres.on('change', newVal => document.getElementById('first_pres').innerText = safe(newVal));
