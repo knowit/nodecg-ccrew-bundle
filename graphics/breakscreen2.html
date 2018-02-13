@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
 
     <style>
+      * {
+        box-sizing: content;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
       body {
         margin: 0;
         padding: 0;
         overflow: hidden;
+        color: #333;
+        width: 1920px;
+
+        /* border: 1px solid black; */
       }
       p {
-        color: white;
-        font-weight: bold;
+        font-weights: bold;
+        /* margin-top: 2em; */
       }
       #bg {
         width: 1920px;
@@ -22,26 +33,57 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: 0;
         right: 0;
-        /* overflow: hidden; */
-        /* background-color: lightblue; */
+        left: 0;
       }
-      #titles {
-        /* background-color: red; */
-        margin-top: 20%;
-        margin-left: 20%;
-        font-size: 4em;
+      #logo {
+        display: inline-block;
+        width: 480px;
+        height: 480px;
+        padding: 300px;
+        padding-right: 150px;
+        vertical-align: top;
+
+        /* background: red; */
+        opacity: 0.5;
+      }
+      #text {
+        width: 840px;
+        width: 820px;
+        width: 970px;
+        padding-top: 300px;
+        display: inline-block;
+
+        font-family:"Helvetica Neue, Helvetica, Liberation Sans, Arial, sans-serif";
+        font-size: 28px;
+        text-align: center;
+        line-height: 33px;
+
+        /* background: lightblue; */
+      }
+      #text h1 {
+        font-family:"Helvetica Neue, Helvetica, Liberation Sans, Arial, sans-serif";
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 50px;
+        letter-spacing: 2px;
       }
     </style>
 </head>
 <body>
-  <img id="bg" src="./blue1.png"/>
+  <img id="bg" src="./breakscreen-bg.png"/>
   <div id="fullscreen">
-    <div id="titles">
-      <p id="first">...</p>
-      <p id="second">...</p>
-      <p id="third">...</p>
+    <div id="logo">&nbsp;</div>
+    <div id="text">
+      <h1>Quality Summit #4</h1>
+      <div id="titles">
+        <br/>
+        <p id="first">...</p>
+        <br/>
+        <p id="second">...</p>
+        <br/>
+        <p id="third">...</p>
+      </div>
     </div>
   </div>
   <script src="app/index.js"></script>
