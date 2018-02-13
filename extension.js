@@ -13,9 +13,4 @@ module.exports = function (nodecg) {
 
   const speaker_name = nodecg.Replicant('speaker_name', {defaultValue: '', persistent: true});
   const presentation_title = nodecg.Replicant('presentation_title', {defaultValue: '', persistent: true});
-
-  // const running = nodecg.Replicant('countdownRunning', {defaultValue: false, persistent: false});
-
-  // nodecg.listenFor('entry_a', start);
-  // // nodecg.listenFor('stopCountdown', stop);
 };

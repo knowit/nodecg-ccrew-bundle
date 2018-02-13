@@ -40,8 +40,6 @@
   </div>
   <script>
     $(document).ready(function() {
-      const event_title = nodecg.Replicant('event_title');
-
       const speaker_name = nodecg.Replicant('speaker_name');
       const presentation_title = nodecg.Replicant('presentation_title');
 
@@ -50,7 +48,7 @@
       presentation_title.on('change', newVal => document.getElementById('presentation_title').value = newVal);
 
       // this sends new data to the backend:
-      const idMap = { first, second, third, first_pres, second_pres, third_pres, event_title };
+      const idMap = { speaker_name, presentation_title };
       document.addEventListener('input', ev => {
         let replicant = idMap[ev.srcElement.id];
         if (replicant) {

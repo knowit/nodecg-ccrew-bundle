@@ -2,8 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        width: 1920px;
+        height: 1080px;
+
+        /* border: 1px solid black; */
+      }
+      #tag {
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+        transform: translateX(-100%);
+        transition: all ease 0.8s;
+      }
+    </style>
 </head>
 <body>
-
+  <img id="tag" src="./tag.svg"/>
+  <script src="app/presenter-overlay.js"></script>
 </body>
 </html>
