@@ -1,5 +1,5 @@
 {
-  "name": "testylicious",
+  "name": "test-bundle",
   "version": "0.0.0",
   "description": "Dynamic broadcast graphics rendered in a browser",
   "homepage": "http://nodecg.com/",
@@ -18,7 +18,7 @@
     "nodecg-bundle"
   ],
   "nodecg": {
-    "compatibleRange": "~0.9.0",
+    "compatibleRange": "~0.8.0",
     "dashboardPanels": [
       {
         "name": "breakscreen",
