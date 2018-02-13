@@ -3,13 +3,24 @@
 
   const safe = value => value == null ? '' : value;
 
-  const tag = document.getElementById('tag');
   const speaker_name = nodecg.Replicant('speaker_name');
+  const presentation_title = nodecg.Replicant('presentation_title');
+  const presenter_overlay_show = nodecg.Replicant('presenter_overlay_show');
 
   setTimeout(() => {
-    // speaker_name.on('change', newVal => { fadeIn(); document.getElementById('speaker_name').innerText = safe(newVal)});
+    presenter_overlay_show.on('change', newVal => {
+      const tag = document.getElementById('tag');
 
-    tag.style.transform = 'translateX(0%)';
+      if (newVal) {
+        console.log("NEW VAL -> SHOW", newVal);
+        tag.style.transform = 'translateX(0%)';
+      } else {
+        console.log("NEW VAL -> HIDE", newVal);
+        tag.style.transform = 'translateX(-100%)';
+      }
+
+    });
+
   }, 1000);
 })();
 

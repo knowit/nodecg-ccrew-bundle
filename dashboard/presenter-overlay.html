@@ -35,24 +35,48 @@
           <input id="presentation_title" type="text" class="validate" value="&nbsp;">
           <label for="presentation_title" class="active">Presentation Title</label>
         </div>
+        <div class="switch">
+          <label>
+            Hide
+            <input id="presenter_overlay_show" type="checkbox">
+            <span class="lever"></span>
+            Show
+          </label>
+        </div>
       </div>
     </form>
   </div>
   <script>
     $(document).ready(function() {
-      const speaker_name = nodecg.Replicant('speaker_name');
-      const presentation_title = nodecg.Replicant('presentation_title');
+      const idMap = {
+        speaker_name: nodecg.Replicant('speaker_name'),
+        presentation_title: nodecg.Replicant('presentation_title'),
+        presenter_overlay_show: nodecg.Replicant('presenter_overlay_show'),
+      };
+
+      const checkbox = document.getElementById('presenter_overlay_show');
 
       // this loads the data from backend:
-      speaker_name.on('change', newVal => document.getElementById('speaker_name').value = newVal);
-      presentation_title.on('change', newVal => document.getElementById('presentation_title').value = newVal);
+      idMap.speaker_name.on('change', newVal => document.getElementById('speaker_name').value = newVal);
+      idMap.presentation_title.on('change', newVal => document.getElementById('presentation_title').value = newVal);
+      idMap.presenter_overlay_show.on('change', newVal => checkbox.checked = newVal);
 
       // this sends new data to the backend:
-      const idMap = { speaker_name, presentation_title };
       document.addEventListener('input', ev => {
+        console.log("INPUT", ev);
         let replicant = idMap[ev.srcElement.id];
         if (replicant) {
           replicant.value = ev.srcElement.value;
+        }
+      });
+
+      const switchThing = document.querySelector('.switch');
+
+      switchThing.addEventListener('click', ev => {
+        console.log("ON CHANGE", ev);
+        let replicant = idMap[ev.srcElement.id];
+        if (replicant) {
+          replicant.value = ev.srcElement.checked;
         }
       });
 
