@@ -2,8 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-</head>
-<body>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+  </script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="speaker_name" type="text" class="validate" value="&nbsp;">
+          <label for="speaker_name" class="active">Speaker Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="presentation_title" type="text" class="validate" value="&nbsp;">
+          <label for="presentation_title" class="active">Presentation Title</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script>
+    $(document).ready(function() {
+      const event_title = nodecg.Replicant('event_title');
+
+      const speaker_name = nodecg.Replicant('speaker_name');
+      const presentation_title = nodecg.Replicant('presentation_title');
+
+      // this loads the data from backend:
+      speaker_name.on('change', newVal => document.getElementById('speaker_name').value = newVal);
+      presentation_title.on('change', newVal => document.getElementById('presentation_title').value = newVal);
+
+      // this sends new data to the backend:
+      const idMap = { first, second, third, first_pres, second_pres, third_pres, event_title };
+      document.addEventListener('input', ev => {
+        let replicant = idMap[ev.srcElement.id];
+        if (replicant) {
+          replicant.value = ev.srcElement.value;
+        }
+      });
+
+      // Make sure materialize understands that we filled inn the inputs fields:
+      // Materialize.updateTextFields();
+    });
+  </script>
 </body>
 </html>
