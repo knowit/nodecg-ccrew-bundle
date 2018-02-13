@@ -15,16 +15,32 @@
         /* border: 1px solid black; */
       }
       #tag {
+        overflow: hidden;
         position: absolute;
         bottom: 120px;
         left: 0;
         transform: translateX(-100%);
         transition: all ease 0.8s;
       }
+      #tag .text {
+        position: absolute;
+        top: 0;
+        left: 220px;
+
+        font-family:"Helvetica Neue, Helvetica, Liberation Sans, Arial, sans-serif";
+        font-size: 28px;
+        line-height: 33px;
+      }
     </style>
 </head>
 <body>
-  <img id="tag" src="./tag.svg"/>
+  <div id="tag">
+    <img src="./tag.svg"/>
+    <div class="text">
+      <p id="speaker_name">Her ja :-)</p>
+      <p id="presentation_title">Her ja 2</p>
+    </div>
+  </div>
   <script src="app/presenter-overlay.js"></script>
 </body>
 </html>

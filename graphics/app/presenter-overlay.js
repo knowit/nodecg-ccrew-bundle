@@ -8,6 +8,9 @@
   const presenter_overlay_show = nodecg.Replicant('presenter_overlay_show');
 
   setTimeout(() => {
+    speaker_name.on('change', newVal => document.getElementById('speaker_name').innerText = newVal);
+    presentation_title.on('change', newVal => document.getElementById('presentation_title').innerText = newVal);
+
     presenter_overlay_show.on('change', newVal => {
       const tag = document.getElementById('tag');
 
