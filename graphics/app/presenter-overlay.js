@@ -16,10 +16,10 @@
 
       if (newVal) {
         console.log("NEW VAL -> SHOW", newVal);
-        tag.style.transform = 'translateX(0%)';
+        tag.style.transform = 'translate3d(0%,0,0)';
       } else {
         console.log("NEW VAL -> HIDE", newVal);
-        tag.style.transform = 'translateX(-100%)';
+        tag.style.transform = 'translate3d(-100%,0,0)';
       }
 
     });
