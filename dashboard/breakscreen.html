@@ -34,32 +34,42 @@
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id="first" type="text" class="validate" value="&nbsp">
+          <input id="first" type="text" class="validate" value="&nbsp;">
           <label for="first" class="active">First speaker</label>
         </div>
         <div class="input-field col s6">
-          <input id="first_pres" type="text" class="validate" value="&nbsp">
+          <input id="first_pres" type="text" class="validate" value="&nbsp;">
           <label for="first_pres" class="active">First presentation title</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id="second" type="text" class="validate" value="&nbsp">
+          <input id="second" type="text" class="validate" value="&nbsp;">
           <label for="second" class="active">Second speaker</label>
         </div>
         <div class="input-field col s6">
-          <input id="second_pres" type="text" class="validate" value="&nbsp">
+          <input id="second_pres" type="text" class="validate" value="&nbsp;">
           <label for="second_pres" class="active">Second presentation title</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id="third" type="text" class="validate" value="&nbsp">
+          <input id="third" type="text" class="validate" value="&nbsp;">
           <label for="third" class="active">Third speaker</label>
         </div>
         <div class="input-field col s6">
-          <input id="third_pres" type="text" class="validate" value="&nbsp">
+          <input id="third_pres" type="text" class="validate" value="&nbsp;">
           <label for="third_pres" class="active">Third presentation title</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="fourth" type="text" class="validate" value="&nbsp;">
+          <label for="fourth" class="active">Fourth speaker</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="fourth_pres" type="text" class="validate" value="&nbsp;">
+          <label for="fourth_pres" class="active">Fourth presentation title</label>
         </div>
       </div>
     </form>
@@ -70,23 +80,33 @@
 
       const first = nodecg.Replicant('first');
       const first_pres = nodecg.Replicant('first_pres');
+
       const second = nodecg.Replicant('second');
       const second_pres = nodecg.Replicant('second_pres');
+
       const third = nodecg.Replicant('third');
       const third_pres = nodecg.Replicant('third_pres');
+
+      const fourth = nodecg.Replicant('fourth');
+      const fourth_pres = nodecg.Replicant('fourth_pres');
 
       // this loads the data from backend:
       event_title.on('change', newVal => document.getElementById('event_title').value = newVal);
 
       first.on('change', newVal => document.getElementById('first').value = newVal);
       first_pres.on('change', newVal => document.getElementById('first_pres').value = newVal);
+
       second.on('change', newVal => document.getElementById('second').value = newVal);
       second_pres.on('change', newVal => document.getElementById('second_pres').value = newVal);
+
       third.on('change', newVal => document.getElementById('third').value = newVal);
       third_pres.on('change', newVal => document.getElementById('third_pres').value = newVal);
 
+      fourth.on('change', newVal => document.getElementById('fourth').value = newVal);
+      fourth_pres.on('change', newVal => document.getElementById('fourth_pres').value = newVal);
+
       // this sends new data to the backend:
-      const idMap = { first, second, third, first_pres, second_pres, third_pres, event_title };
+      const idMap = { first, second, third, fourth, first_pres, second_pres, third_pres, fourth_pres, event_title };
       document.addEventListener('input', ev => {
         let replicant = idMap[ev.srcElement.id];
         if (replicant) {
