@@ -1,12 +1,12 @@
 {
-  "name": "test-bundle",
+  "name": "nodecg-ccrew-bundle",
   "version": "0.0.0",
-  "description": "Dynamic broadcast graphics rendered in a browser",
+  "description": "Dynamic broadcast graphics made by Knowit Creative Crew",
   "homepage": "http://nodecg.com/",
   "author": {
-    "name": "sce",
-    "email": "christoffer@eliesen.no",
-    "url": "github.com/sce"
+    "name": "knowitccrew",
+    "email": "creative.crew@knowit.no",
+    "url": "github.com/knowitccrew"
   },
   "files": [
     "dashboard",
