@@ -33,6 +33,13 @@
         "width": 4,
         "file": "presenter-overlay.html",
         "headerColor": "#9f9bbd"
+      },
+      {
+        "name": "speaker-list",
+        "title": "Speaker List",
+        "width": 8,
+        "file": "speaker-list.html",
+        "headerColor": "#9f9bbd"
       }
     ],
     "graphics": [
