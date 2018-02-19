@@ -15,4 +15,7 @@ module.exports = function (nodecg) {
 
   const speaker_name = nodecg.Replicant('speaker_name', {defaultValue: '', persistent: true});
   const presentation_title = nodecg.Replicant('presentation_title', {defaultValue: '', persistent: true});
+
+  // follows schemas/speakerList.json:
+  nodecg.Replicant('speakerList', { defaultValue: [], persistent: true });
 };
