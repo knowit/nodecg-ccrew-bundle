@@ -1,0 +1,28 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "array",
+	"default": [],
+	"items": {
+		"type": "object",
+		"additionalProperties": false,
+		"properties": {
+			"speakerName": {
+				"type": "string",
+				"default": ""
+			},
+			"presentationTitle": {
+				"type": "string",
+				"default": ""
+			},
+			"lengthMins": {
+				"type": "number",
+				"default": 0
+			},
+			"createdTimestamp": {
+				"type": "number",
+				"default": 0
+			}
+		},
+		"required": ["speakerName", "presentationTitle", "lengthMins", "createdTimeStamp"]
+	}
+}
