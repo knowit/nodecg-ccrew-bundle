@@ -23,31 +23,36 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
   <div class="row">
-    <form class="col s12">
-      <div class="row valign-wrapper">
-        <div class="input-field col s6">
-          <input id="speaker_name" type="text" class="validate" value="&nbsp;">
-          <label for="speaker_name" class="active">Speaker Name</label>
-        </div>
-        <div class="col s6 right-align">
-          <div class="switch">
-            <label>
-              Hide
-              <input id="presenter_overlay_show" type="checkbox">
-              <span class="lever"></span>
-              Show
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="presentation_title" type="text" class="validate" value="&nbsp;">
-          <label for="presentation_title" class="active">Presentation Title</label>
-        </div>
-      </div>
-    </form>
+    <div class="col s12">
+      The text will vertically center and the CSS will expand with more
+      lines when needed. You should be able to get a total of <b>4 lines</b>
+      on the tag, please test to make sure you don't overflow!
+    </div>
   </div>
+  <form>
+    <div class="row valign-wrapper">
+      <div class="input-field col s8">
+        <input id="speaker_name" type="text" class="validate" value="&nbsp;">
+        <label for="speaker_name" class="active">Speaker Name</label>
+      </div>
+      <div class="col s4 right-align">
+        <div class="switch">
+          <label>
+            Hide
+            <input id="presenter_overlay_show" type="checkbox">
+            <span class="lever"></span>
+            Show
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="presentation_title" type="text" class="validate" value="&nbsp;">
+        <label for="presentation_title" class="active">Presentation Title</label>
+      </div>
+    </div>
+  </form>
   <script>
     $(document).ready(function() {
       const idMap = {

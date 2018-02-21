@@ -19,12 +19,26 @@
         transform: translate3d(-100%, 0, 0);
         transition: all ease 0.8s;
       }
+      .ellipsis {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
       #tag .text {
+        overflow: hidden;
+
         position: absolute;
-        top: 1px;
-        bottom: 5px;
         left: 220px;
-        width: 580px;
+        right: 110px;
+        /* width: 540px; */
+
+        max-height: 190px;
+
+        /* vertically center: */
+        top: 50%;
+        transform: translateY(-50%);
+
+        /* background-color: lightblue; */
 
         font-family:"Helvetica Neue, Helvetica, nimbus-sans, Arial, Liberation Sans, Arial, sans-serif";
         font-size: 28px;
@@ -38,6 +52,8 @@
       }
       #presentation_title {
         font-weight: bold;
+      }
+      #speaker_name {
       }
     </style>
 </head>
