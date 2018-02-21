@@ -60,8 +60,14 @@
         max-width: 970px;
         max-width: 1035px; */
         width: 950px;
-        padding-top: 300px;
-        padding-top: 210px; /* <-- only with fourth entry! */
+
+        /* vertically center */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        /* by only using absolute position for top the horizontal position will
+           be decided by the logo (it will flow) */
         display: inline-block;
 
         font-family:"Helvetica Neue, HelveticaNeue, Helvetica, Liberation Sans, Arial, sans-serif";
