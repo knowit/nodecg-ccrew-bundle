@@ -103,10 +103,6 @@ class Switch extends React.Component {
     }
   }
 
-  componentDidMount() {
-    // Materialize.updateTextFields();
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.replicant) {
       //console.log("switch nextProps.replicant", nextProps.replicant);
@@ -150,6 +146,13 @@ class Talk extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    // For some reason we need to wait a little before firing updateTextFields
+    // or else it doesn't have any effect. Calling this function makes the
+    // labels move out of the way for existing/pre-filled text.
+    setTimeout(() => Materialize.updateTextFields(), 1000);
+  }
+
   render() {
     const { title, num, active } = this.props;
     const id = label => `${label}_${num}`;
@@ -190,7 +193,7 @@ class Talk extends React.Component {
 }
 
 
-ReactDOM.render( (
+$(document).ready(() => ReactDOM.render((
   <Row>
     <form className="col s12">
       <Row>
@@ -206,5 +209,5 @@ ReactDOM.render( (
   </Row>
   ),
   document.getElementById('root')
-);
+));
 
