@@ -155,27 +155,31 @@ class Talk extends React.Component {
     const id = label => `${label}_${num}`;
 
     const activeClass = active ? 'green accent-1' : '';
+    const setActiveState = active ? 'disabled' : '';
     return (
         <Row>
           <div className={`card col s12 ${activeClass}`}>
             <div className="card-content" style={{ overflow: 'hidden' }}>
               <Row>
-                <Column s6>
+                <Column s7>
                   <span className="card-title">
                     Talk #{num}
                     <a className="waves-effect waves-teal btn-flat red-text">Delete</a>
                   </span>
                 </Column>
-                <Switch s6 id={id('talkActive')} className="right-align" />
+                <Column s3 className="right-align">
+                  <a className={`waves-effect waves-teal btn ${setActiveState}`}>Set as Active</a>
+                </Column>
+                <Switch s2 id={id('talkActive')} className="right-align" />
               </Row>
               <div>
                 <Input s5 label="Speaker Name" id={id('speaker_name')}/>
-                <Input s5 label="Presentation Title" id={id('pres_title_2')}/>
+                <Input s5 label="Presentation Title" id={id('pres_title')}/>
                 <Column s2 className="input-field valign-wrapper">
                   <p className="range-field valign-wrapper">
-                    <input id={id('length_2')} type="range" min="0" max="60" value="0" />
+                    <input id={id('length')} type="range" min="0" max="60" value="0" />
                   </p>
-                  <label for={id('length_2')} className="active">Length (minutes)</label>
+                  <label for={id('length')} className="active">Length (minutes)</label>
                 </Column>
               </div>
             </div>
