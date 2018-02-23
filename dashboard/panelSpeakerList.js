@@ -137,18 +137,37 @@ class Switch extends React.Component {
 
 
 ReactDOM.render( (
-    <form>
-      <Row valign>
-        <Column s10>
-          <div className="right-align" style={{ fontWeight: 'bolder' }}>Entire Omnibar</div>
-        </Column>
-        <Switch s2 id="omnibarSwitch" replicant={nodecg.Replicant('omnibarSwitch', { persist: true })} className="right-align white-text" />
+  <Row>
+    <form className="col s12">
+      <Row>
+        <Input s12 label="Event Title" id="event_title" replicant={nodecg.Replicant('event_title', { persist: true })} />
       </Row>
-      <Row valign>
-        <Input s10 label="Text" id="omnibarText" replicant={nodecg.Replicant('omnibarText', { persist: true })} />
-        <Switch s2 id="omnibarTextSwitch" replicant={nodecg.Replicant('omnibarTextSwitch', { persist: true })} className="right-align" />
+      <Row>
+        <div className="card col s12">
+          <div className="card-content">
+            <Row>
+              <Column s8>
+                <span className="card-title">Talk #2</span>
+              </Column>
+              <Column s4 className="right-align">
+                <a className="waves-effect waves-teal btn-flat red-text">Delete</a>
+              </Column>
+            </Row>
+            <Row>
+              <Input s5 label="Speaker Name" id="speaker_name"/>
+              <Input s5 label="Presentation Title" id="pres_title"/>
+              <Column s2 className="input-field valign-wrapper">
+                <p className="range-field valign-wrapper">
+                  <input id="second_length" type="range" min="0" max="60" value="0" />
+                </p>
+                <label for="second_length" className="active">Length (minutes)</label>
+              </Column>
+            </Row>
+          </div>
+        </div>
       </Row>
     </form>
+  </Row>
   ),
   document.getElementById('root')
 );
