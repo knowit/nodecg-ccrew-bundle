@@ -35,10 +35,10 @@
         "headerColor": "#9f9bbd"
       },
       {
-        "name": "speaker-list",
+        "name": "panelSpeakerList",
         "title": "Speaker List",
         "width": 8,
-        "file": "speaker-list.html",
+        "file": "panelSpeakerList.html",
         "headerColor": "#9f9bbd"
       }
     ],
