@@ -33,6 +33,7 @@ class Input extends React.Component {
     if (props.id) {
       const { replicant = nodecg.Replicant(props.id, { persist: true }) } = props;
 
+      //console.log("replicant", replicant, props);
       this.unsubscribe = replicant.on('change', newValue => this.setState({ value: newValue }));
       this.state.replicant = replicant;
     }
@@ -40,6 +41,7 @@ class Input extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.replicant) {
+      //console.log("nextProps.replicant", nextProps.replicant);
       if (this.unsubscribe) {
         // remember to remove old event listener:
         this.unsubscribe();
@@ -92,15 +94,22 @@ class Switch extends React.Component {
     super(props);
     this.state = { isChecked: false };
 
-    const { replicant } = props;
-    if (replicant) {
+    if (props.id) {
+      const { replicant = nodecg.Replicant(props.id, { persist: true }) } = props;
+
+      //console.log("switch replicant", replicant);
       this.unsubscribe = replicant.on('change', newValue => this.setState({ isChecked: newValue }));
       this.state.replicant = replicant;
     }
   }
 
+  componentDidMount() {
+    // Materialize.updateTextFields();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.replicant) {
+      //console.log("switch nextProps.replicant", nextProps.replicant);
       if (this.unsubscribe) {
         // remember to remove old event listener:
         this.unsubscribe();
@@ -143,27 +152,81 @@ ReactDOM.render( (
       <Row>
         <Input s12 label="Event Title" id="event_title" />
       </Row>
+
       <Row>
         <div className="card col s12">
-          <div className="card-content">
+          <div className="card-content" style={{ overflow: 'hidden' }}>
             <Row>
-              <Column s8>
-                <span className="card-title">Talk #2</span>
+              <Column s6>
+                <span className="card-title">
+                  Talk #1
+                  <a className="waves-effect waves-teal btn-flat red-text">Delete</a>
+                </span>
               </Column>
-              <Column s4 className="right-align">
-                <a className="waves-effect waves-teal btn-flat red-text">Delete</a>
-              </Column>
+              <Switch s6 id="talk1Active" className="right-align" />
             </Row>
-            <Row>
-              <Input s5 label="Speaker Name" id="speaker_name"/>
-              <Input s5 label="Presentation Title" id="pres_title"/>
+            <div>
+              <Input s5 label="Speaker Name" id="speaker_name_1"/>
+              <Input s5 label="Presentation Title" id="pres_title_1"/>
               <Column s2 className="input-field valign-wrapper">
                 <p className="range-field valign-wrapper">
-                  <input id="second_length" type="range" min="0" max="60" value="0" />
+                  <input id="length_1" type="range" min="0" max="60" value="0" />
                 </p>
-                <label for="second_length" className="active">Length (minutes)</label>
+                <label for="length_1" className="active">Length (minutes)</label>
               </Column>
+            </div>
+          </div>
+        </div>
+      </Row>
+
+      <Row>
+        <div className="card col s12 green accent-1">
+          <div className="card-content" style={{ overflow: 'hidden' }}>
+            <Row>
+              <Column s6>
+                <span className="card-title">
+                  Talk #2
+                  <a className="waves-effect waves-teal btn-flat red-text">Delete</a>
+                </span>
+              </Column>
+              <Switch s6 id="talkActive_2" className="right-align" />
             </Row>
+            <div>
+              <Input s5 label="Speaker Name" id="speaker_name_2"/>
+              <Input s5 label="Presentation Title" id="pres_title_2"/>
+              <Column s2 className="input-field valign-wrapper">
+                <p className="range-field valign-wrapper">
+                  <input id="length_2" type="range" min="0" max="60" value="0" />
+                </p>
+                <label for="length_2" className="active">Length (minutes)</label>
+              </Column>
+            </div>
+          </div>
+        </div>
+      </Row>
+
+      <Row>
+        <div className="card col s12">
+          <div className="card-content" style={{ overflow: 'hidden' }}>
+            <Row>
+              <Column s6>
+                <span className="card-title">
+                  Talk #3
+                  <a className="waves-effect waves-teal btn-flat red-text">Delete</a>
+                </span>
+              </Column>
+              <Switch s6 id="talkActive_3" className="right-align" />
+            </Row>
+            <div>
+              <Input s5 label="Speaker Name" id="speaker_name_3"/>
+              <Input s5 label="Presentation Title" id="pres_title_3"/>
+              <Column s2 className="input-field valign-wrapper">
+                <p className="range-field valign-wrapper">
+                  <input id="length_3" type="range" min="0" max="60" value="0" />
+                </p>
+                <label for="length_3" className="active">Length (minutes)</label>
+              </Column>
+            </div>
           </div>
         </div>
       </Row>
