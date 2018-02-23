@@ -30,8 +30,9 @@ class Input extends React.Component {
 
     this.state = { value: '' };
 
-    const { replicant } = props;
-    if (replicant) {
+    if (props.id) {
+      const { replicant = nodecg.Replicant(props.id, { persist: true }) } = props;
+
       this.unsubscribe = replicant.on('change', newValue => this.setState({ value: newValue }));
       this.state.replicant = replicant;
     }
@@ -140,7 +141,7 @@ ReactDOM.render( (
   <Row>
     <form className="col s12">
       <Row>
-        <Input s12 label="Event Title" id="event_title" replicant={nodecg.Replicant('event_title', { persist: true })} />
+        <Input s12 label="Event Title" id="event_title" />
       </Row>
       <Row>
         <div className="card col s12">
