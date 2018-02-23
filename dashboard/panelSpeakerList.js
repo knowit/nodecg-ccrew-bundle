@@ -144,6 +144,7 @@ class Switch extends React.Component {
 class Talk extends React.Component {
   constructor(props) {
     super(props);
+    this.id = label => `${label}_${props.num}`;
   }
 
   componentDidMount() {
@@ -151,18 +152,33 @@ class Talk extends React.Component {
     // or else it doesn't have any effect. Calling this function makes the
     // labels move out of the way for existing/pre-filled text.
     setTimeout(() => Materialize.updateTextFields(), 1000);
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year,
+      today: 'Today',
+      clear: 'Clear',
+      close: 'Ok',
+      closeOnSelect: true, // Close upon selecting a date,
+    });
   }
 
   render() {
     const { title, num, active } = this.props;
-    const id = label => `${label}_${num}`;
+    const { id } = this;
 
-    const activeClass = active ? 'green accent-1' : '';
     const setActiveState = active ? 'disabled' : '';
+
+    const Card = ({ children, active }) => {
+      const activeClass = active ? 'green accent-1' : '';
+      return <Column s12 className={`card ${activeClass}`}>{children}</Column>;
+    };
+
+    const CardContent = ({ children }) => <div className="card-content" style={{ overflow: 'hidden' }}>{children}</div>;
+
     return (
         <Row>
-          <div className={`card col s12 ${activeClass}`}>
-            <div className="card-content" style={{ overflow: 'hidden' }}>
+          <Card active={active}>
+            <CardContent>
               <Row>
                 <Column s7>
                   <span className="card-title">
@@ -185,8 +201,8 @@ class Talk extends React.Component {
                   <label for={id('length')} className="active">Length (minutes)</label>
                 </Column>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </Row>
     );
   }
@@ -197,7 +213,12 @@ $(document).ready(() => ReactDOM.render((
   <Row>
     <form className="col s12">
       <Row>
-        <Input s12 label="Event Title" id="event_title" />
+        <Input s8 label="Event Title" id="event_title" />
+
+        <Column s4 className="input-field valign-wrapper">
+          <input type="text" id={'event_date'} className="datepicker" />
+          <label for={'event_date'} className="active">Event Date</label>
+        </Column>
       </Row>
 
       <Talk num='1' />
