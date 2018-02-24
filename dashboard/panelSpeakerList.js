@@ -59,6 +59,12 @@ class Input extends React.Component {
     // set state indirectly (via replicant value, which in turn will set the value in state)
     const handleChange = ({ target: { value }}) => {
       if (this.state.replicant) { this.state.replicant.value = value }
+      // We will get the correct value in return from Replicant backend soon,
+      // however we need to set the value immediately or risk React changing
+      // the value back and forth between old and new value, which again causes
+      // the cursor to move to the end of the input field.
+      // https://stackoverflow.com/questions/28922275/in-reactjs-why-does-setstate-behave-differently-when-called-synchronously/28922465#28922465
+      this.setState({ value });
     };
 
     const { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 } = this.props;
