@@ -89,6 +89,26 @@ class Input extends React.Component {
   }
 }
 
+// ComplexReplicant acts as a middleware between the real Replicant value and
+// the consumer. It needs a marshall and an unmarshall function that
+// translates/maps between simple input/output and the real datastructure.
+class ComplexReplicant {
+  constructor(props = {}) {
+    this.replicant = props.replicant;
+    this.marshal = props.marshal;
+    this.unmarshal = props.unmarshal;
+  }
+
+  on(eventName, callback) {
+    //return this.replicant.on(eventName, callback);
+    return this.replicant.on(eventName, newVal => this.unmarshal(callback, newVal));
+  }
+
+  set value(newValue) {
+    return this.marshal(this.replicant, newValue);
+  }
+}
+
 class Switch extends React.Component {
   constructor(props) {
     super(props);
@@ -213,7 +233,12 @@ $(document).ready(() => ReactDOM.render((
   <Row>
     <form className="col s12">
       <Row>
-        <Input s8 label="Event Title" id="event_title" />
+        <Input s8 label="Event Title" id="event_title"
+          replicant={new ComplexReplicant({
+            replicant: nodecg.Replicant('event_title'),
+            marshal: (repl, val) => { console.log("SENDING", val); repl.value = val },
+            unmarshal: (cb, val, a, b, c) => { console.log("GOT BACK", val);  cb(val); },
+          })}/>
 
         <Column s4 className="input-field valign-wrapper">
           <input type="text" id={'event_date'} className="datepicker" />
