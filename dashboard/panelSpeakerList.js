@@ -1,6 +1,9 @@
-const Row = ({ children, valign, className = ''}) => (
-  <div className={`row ${valign ? "valign-wrapper" : ''} ${className}`}>{children}</div>
-);
+const Row = ({ children, valign, className = '', packed }) => {
+  const style = packed ? { marginBottom: '0px' } : {};
+  return (
+    <div className={`row ${valign ? "valign-wrapper" : ''} ${className}`} style={style}>{children}</div>
+  );
+}
 
 const Column = ({ s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, className, children }) => {
   const width =
@@ -196,40 +199,45 @@ class Talk extends React.Component {
 
     const Card = ({ children, active }) => {
       const activeClass = active ? 'green accent-1' : '';
-      return <Column s12 className={`card ${activeClass}`}>{children}</Column>;
+      return (
+        <Column s12 className={`card ${activeClass}`}>
+          <div className="card-content" style={{ overflow: 'hidden' }}>
+            {children}
+          </div>
+        </Column>
+      );
     };
 
-    const CardContent = ({ children }) => <div className="card-content" style={{ overflow: 'hidden' }}>{children}</div>;
 
     return (
-        <Row>
-          <Card active={active}>
-            <CardContent>
-              <Row>
-                <Column s7>
-                  <span className="card-title">
-                    Talk #{num}
-                    <a className="waves-effect waves-teal btn-flat red-text">Delete</a>
-                  </span>
-                </Column>
-                <Column s3 className="right-align">
-                  <a className={`waves-effect waves-teal btn ${setActiveState}`}>Set as Active</a>
-                </Column>
-                <Switch s2 id={id('talkActive')} className="right-align" />
-              </Row>
-              <div>
-                <Input s5 label="Speaker Name" id={id('speaker_name')}/>
-                <Input s5 label="Presentation Title" id={id('pres_title')}/>
-                <Column s2 className="input-field valign-wrapper">
-                  <p className="range-field valign-wrapper">
-                    <input id={id('length')} type="range" min="0" max="60" value="0" />
-                  </p>
-                  <label for={id('length')} className="active">Length (minutes)</label>
-                </Column>
-              </div>
-            </CardContent>
-          </Card>
-        </Row>
+      <Row packed>
+        <Card active={active}>
+          <Row packed>
+            <Column s7>
+              <span className="card-title">
+                Talk #{num}
+                <a className="waves-effect waves-teal btn-flat red-text">Delete</a>
+              </span>
+            </Column>
+            <Column s3 className="right-align">
+              <a className={`waves-effect waves-teal btn ${setActiveState}`}>Set as Active</a>
+            </Column>
+
+            <Switch s2 id={id('talkActive')} className="right-align" />
+          </Row>
+
+          <Row packed>
+            <Input s5 label="Speaker Name" id={id('speaker_name')}/>
+            <Input s5 label="Presentation Title" id={id('pres_title')}/>
+            <Column s2 className="input-field valign-wrapper">
+              <p className="range-field valign-wrapper">
+                <input id={id('length')} type="range" min="0" max="60" value="0" />
+              </p>
+              <label for={id('length')} className="active">Length (minutes)</label>
+            </Column>
+          </Row>
+        </Card>
+      </Row>
     );
   }
 }
@@ -238,7 +246,7 @@ class Talk extends React.Component {
 $(document).ready(() => ReactDOM.render((
   <Row>
     <form className="col s12">
-      <Row>
+      <Row packed>
         <Input s8 label="Event Title" id="event_title"
           replicant={new ComplexReplicant({
             replicant: nodecg.Replicant('event_title'),
