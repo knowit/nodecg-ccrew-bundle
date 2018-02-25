@@ -278,9 +278,8 @@ class Talk extends React.Component {
           </Row>
 
           <Row packed>
-            <Input s5 label="Speaker Name" id={id('speaker_name')}/>
-            <Input s5 label="Presentation Title" id={id('pres_title')}/>
-            <Range s2 label="Duration (mins)" id={id('length')} className="valign-wrapper" min="0" max="60" />
+            <Input s4 label="Speaker Name" id={id('speaker_name')}/>
+            <Input s8 label="Presentation Title" id={id('pres_title')}/>
           </Row>
         </Card>
       </Row>
