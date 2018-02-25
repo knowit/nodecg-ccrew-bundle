@@ -37,13 +37,17 @@ class Input extends React.Component {
       const { replicant = nodecg.Replicant(props.id, { persist: true }) } = props;
 
       //console.log("replicant", replicant, props);
-      this.unsubscribe = replicant.on('change', newValue => this.setState({ value: newValue }));
+      const cb = newValue => this.setState({ value: newValue });
+      replicant.on('change', cb);
+      this.unsubscribe = () => replicant.removeListener('change', cb);
+
       this.state.replicant = replicant;
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.replicant) {
+    console.log("input nextprops:", nextprops);
+    if (!this.props.replicant && nextProps.replicant) {
       //console.log("nextProps.replicant", nextProps.replicant);
       if (this.unsubscribe) {
         // remember to remove old event listener:
@@ -51,14 +55,17 @@ class Input extends React.Component {
       }
 
       // get data from backend:
-      this.unsubscribe = nextProps.replicant.on('change', newValue => {
-        this.setState({ value: newValue })
-      });
+      const { replicant } = nextProps;
+      const cb = newValue => this.setState({ value: newValue });
+      replicant.on('change', cb);
+      this.unsubscribe = () => replicant.removeListener('change', cb);
+
       this.setState({ replicant: nextProps.replicant });
     }
   }
 
   render() {
+    //console.log("active button render:", this.state, this.props);
     // set state indirectly (via replicant value, which in turn will set the value in state)
     const handleChange = ({ target: { value }}) => {
       if (this.state.replicant) { this.state.replicant.value = value }
@@ -70,22 +77,6 @@ class Input extends React.Component {
       this.setState({ value });
     };
 
-    const { s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 } = this.props;
-
-    const width =
-      s1 && "s1" ||
-      s2 && "s2" ||
-      s3 && "s3" ||
-      s4 && "s4" ||
-      s5 && "s5" ||
-      s6 && "s6" ||
-      s7 && "s7" ||
-      s8 && "s8" ||
-      s9 && "s9" ||
-      s10 && "s10" ||
-      s11 && "s11" ||
-      "s12";
-
     const { id, label } = this.props;
     const { value = '' } = this.state;
 
@@ -95,6 +86,14 @@ class Input extends React.Component {
         <label for={id} className="active">{label}</label>
       </Column>
     );
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      console.log(this.unsubscribe);
+      // remember to remove old event listener:
+      this.unsubscribe();
+    }
   }
 }
 
@@ -121,19 +120,23 @@ class ComplexReplicant {
 class Switch extends React.Component {
   constructor(props) {
     super(props);
+    console.log("switch constructor");
     this.state = { isChecked: false };
 
     if (props.id) {
       const { replicant = nodecg.Replicant(props.id, { persist: true }) } = props;
 
       //console.log("switch replicant", replicant);
-      this.unsubscribe = replicant.on('change', newValue => this.setState({ isChecked: newValue }));
+      const cb = newValue => this.setState({ isChecked: newValue });
+      replicant.on('change', cb);
+      this.unsubscribe = () => replicant.removeListener('change', cb);
+
       this.state.replicant = replicant;
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.replicant) {
+    if (!this.props.replicant && nextProps.replicant) {
       //console.log("switch nextProps.replicant", nextProps.replicant);
       if (this.unsubscribe) {
         // remember to remove old event listener:
@@ -141,9 +144,11 @@ class Switch extends React.Component {
       }
 
       // get data from backend:
-      this.unsubscribe = nextProps.replicant.on('change', newValue => {
-        this.setState({ isChecked: newValue })
-      });
+      const { replicant } = nextProps;
+      const cb = newValue => this.setState({ isChecked: newValue });
+      replicant.on('change', cb);
+      this.unsubscribe = () => replicant.removeListener('change', cb);
+
       this.setState({ replicant: nextProps.replicant });
     }
   }
@@ -168,11 +173,20 @@ class Switch extends React.Component {
       </Column>
     );
   }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      console.log(this.unsubscribe);
+      // remember to remove old event listener:
+      this.unsubscribe();
+    }
+  }
 }
 
 class Range extends React.Component {
   constructor(props) {
     super(props);
+    console.log("range constructor");
     this.state = { value: 0 };
     // this.id = label => `${label}_${props.num}`;
 
@@ -180,13 +194,15 @@ class Range extends React.Component {
       const { replicant = nodecg.Replicant(props.id, { persist: true }) } = props;
 
       //console.log("switch replicant", replicant);
-      this.unsubscribe = replicant.on('change', newValue => this.setState({ value: newValue }));
+      const cb = newValue => this.setState({ value: newValue });
+      replicant.on('change', cb);
+      this.unsubscribe = () => replicant.removeListener('change', cb);
       this.state.replicant = replicant;
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.replicant) {
+    if (!this.props.replicant && nextProps.replicant) {
       //console.log("switch nextProps.replicant", nextProps.replicant);
       if (this.unsubscribe) {
         // remember to remove old event listener:
@@ -194,10 +210,12 @@ class Range extends React.Component {
       }
 
       // get data from backend:
-      this.unsubscribe = nextProps.replicant.on('change', newValue => {
-        this.setState({ value: newValue })
-      });
-      this.setState({ replicant: nextProps.replicant });
+      const { replicant } = nextProps;
+      const cb = newValue => this.setState({ value: newValue });
+      replicant.on('change', cb);
+      this.unsubscribe = () => replicant.removeListener('change', cb);
+
+      this.setState({ replicant });
     }
   }
 
@@ -219,17 +237,29 @@ class Range extends React.Component {
       </Column>
     );
   }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      console.log(this.unsubscribe);
+      // remember to remove old event listener:
+      this.unsubscribe();
+    }
+  }
 }
 
 class DatePicker extends React.Component {
   constructor(props) {
     super(props);
+    console.log("datepicker constructor");
     this.state = { value: '' };
 
     if (props.id) {
       const { replicant = nodecg.Replicant(props.id, { persist: true }) } = props;
 
-      this.unsubscribe = replicant.on('change', timestamp => this.setState({ value: new Date(timestamp) }));
+      const cb = timestamp => this.setState({ value: new Date(timestamp) });
+      replicant.on('change', cb);
+      this.unsubscribe = () => replicant.removeListener('change', cb);
+
       this.state.replicant = replicant;
     }
   }
@@ -251,7 +281,7 @@ class DatePicker extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.replicant) {
+    if (!this.props.replicant && nextProps.replicant) {
       //console.log("switch nextProps.replicant", nextProps.replicant);
       if (this.unsubscribe) {
         // remember to remove old event listener:
@@ -259,9 +289,11 @@ class DatePicker extends React.Component {
       }
 
       // get data from backend:
-      this.unsubscribe = nextProps.replicant.on('change', timestamp => {
-        this.setState({ value: new Date(timestamp) })
-      });
+      const { replicant } = nextProps;
+      const cb = timestamp => this.setState({ value: new Date(timestamp) });
+      replicant.on('change', cb);
+      this.unsubscribe = () => replicant.removeListener('change', cb);
+
       this.setState({ replicant: nextProps.replicant });
     }
   }
@@ -277,12 +309,33 @@ class DatePicker extends React.Component {
       </Column>
     );
   }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      console.log(this.unsubscribe);
+      // remember to remove old event listener:
+      this.unsubscribe();
+    }
+  }
 }
 
 class Talk extends React.Component {
   constructor(props) {
     super(props);
+    console.log("talk constructor");
     this.id = label => `${label}_${props.num}`;
+
+    // replicant for tracking active/current:
+    const { replicant = nodecg.Replicant('active_talk', { persist: true }) } = props;
+
+    const cb = number => this.setState({ active: number });
+    replicant.on('change', cb);
+    this.unsubscribe = () => replicant.removeListener('change', cb);
+
+    this.state = {
+      active: props.active,
+      replicant,
+    };
   }
 
   componentDidMount() {
@@ -293,10 +346,13 @@ class Talk extends React.Component {
   }
 
   render() {
-    const { title, num, active } = this.props;
+    // console.log("talk render:", this.state, this.props);
+    const { title, num } = this.props;
+    const { active, replicant } = this.state;
     const { id } = this;
 
-    const setActiveState = active ? 'disabled' : '';
+    const isActive = active == num;
+    const setActiveState = isActive ? 'disabled' : '';
 
     const Card = ({ children, active }) => {
       const activeClass = active ? 'green accent-1' : '';
@@ -309,10 +365,9 @@ class Talk extends React.Component {
       );
     };
 
-
     return (
       <Row packed>
-        <Card active={active}>
+        <Card active={isActive}>
           <Row packed>
             <Column s7>
               <span className="card-title">
@@ -321,7 +376,7 @@ class Talk extends React.Component {
               </span>
             </Column>
             <Column s3 className="right-align">
-              <a className={`waves-effect waves-teal btn ${setActiveState}`}>Set as Active</a>
+              <a className={`waves-effect waves-teal btn ${setActiveState}`} onClick={() => { replicant.value = num }}>Set as Active</a>
             </Column>
 
             <Switch s2 id={id('talkActive')} className="right-align" />
@@ -334,6 +389,14 @@ class Talk extends React.Component {
         </Card>
       </Row>
     );
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      console.log(this.unsubscribe);
+      // remember to remove old event listener:
+      this.unsubscribe();
+    }
   }
 }
 
@@ -353,7 +416,7 @@ $(document).ready(() => ReactDOM.render((
       </Row>
 
       <Talk num='1' />
-      <Talk num='2' active />
+      <Talk num='2' />
       <Talk num='3' />
       <Talk num='4' />
 
