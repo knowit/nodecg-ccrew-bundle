@@ -221,6 +221,64 @@ class Range extends React.Component {
   }
 }
 
+class DatePicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+
+    if (props.id) {
+      const { replicant = nodecg.Replicant(props.id, { persist: true }) } = props;
+
+      this.unsubscribe = replicant.on('change', timestamp => this.setState({ value: new Date(timestamp) }));
+      this.state.replicant = replicant;
+    }
+  }
+
+  componentDidMount(){
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 2, // Creates a dropdown of x years to control year,
+      today: 'Today',
+      clear: 'Clear',
+      close: 'Ok',
+      closeOnSelect: true, // Close upon selecting a date,
+    })
+      .pickadate('picker')
+      .on('set', data => {
+        this.setState({ value: new Date(data.select) });
+        if (this.state.replicant) { this.state.replicant.value = data.select }
+      })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.replicant) {
+      //console.log("switch nextProps.replicant", nextProps.replicant);
+      if (this.unsubscribe) {
+        // remember to remove old event listener:
+        this.unsubscribe();
+      }
+
+      // get data from backend:
+      this.unsubscribe = nextProps.replicant.on('change', timestamp => {
+        this.setState({ value: new Date(timestamp) })
+      });
+      this.setState({ replicant: nextProps.replicant });
+    }
+  }
+
+  render() {
+    const { id, label, className = ''} = this.props;
+    const { value } = this.state;
+
+    return (
+      <Column {...this.props} className={`input-field valign-wrapper ${className}`}>
+        <input type="text" id={id} className="datepicker" value={value} />
+        <label for={id} className="active">{label}</label>
+      </Column>
+    );
+  }
+}
+
 class Talk extends React.Component {
   constructor(props) {
     super(props);
@@ -232,14 +290,6 @@ class Talk extends React.Component {
     // or else it doesn't have any effect. Calling this function makes the
     // labels move out of the way for existing/pre-filled text.
     setTimeout(() => Materialize.updateTextFields(), 1000);
-    $('.datepicker').pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 2, // Creates a dropdown of x years to control year,
-      today: 'Today',
-      clear: 'Clear',
-      close: 'Ok',
-      closeOnSelect: true, // Close upon selecting a date,
-    });
   }
 
   render() {
@@ -299,10 +349,7 @@ $(document).ready(() => ReactDOM.render((
             unmarshal: (cb, val, a, b, c) => { console.log("GOT BACK", val);  cb(val); },
           })}/>
 
-        <Column s4 className="input-field valign-wrapper">
-          <input type="text" id={'event_date'} className="datepicker" />
-          <label for={'event_date'} className="active">Event Date</label>
-        </Column>
+        <DatePicker s4 label="Event dateee" id="event_date" />
       </Row>
 
       <Talk num='1' />
