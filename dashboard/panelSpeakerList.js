@@ -170,6 +170,57 @@ class Switch extends React.Component {
   }
 }
 
+class Range extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: 0 };
+    // this.id = label => `${label}_${props.num}`;
+
+    if (props.id) {
+      const { replicant = nodecg.Replicant(props.id, { persist: true }) } = props;
+
+      //console.log("switch replicant", replicant);
+      this.unsubscribe = replicant.on('change', newValue => this.setState({ value: newValue }));
+      this.state.replicant = replicant;
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.replicant) {
+      //console.log("switch nextProps.replicant", nextProps.replicant);
+      if (this.unsubscribe) {
+        // remember to remove old event listener:
+        this.unsubscribe();
+      }
+
+      // get data from backend:
+      this.unsubscribe = nextProps.replicant.on('change', newValue => {
+        this.setState({ value: newValue })
+      });
+      this.setState({ replicant: nextProps.replicant });
+    }
+  }
+
+  render() {
+    const { id, label, min = 0, max = 60, className = ''} = this.props;
+    const { value } = this.state;
+
+    // set state indirectly (via replicant value, which in turn will set the value in state)
+    const handleChange = ({ target: { value }}) => {
+      if (this.state.replicant) { this.state.replicant.value = value }
+    };
+
+    return (
+      <Column {...this.props} className={`input-field center-align ${className}`}>
+        <div className="range-field valign-wrapper" style={{ width: "100%" }}>
+          <input id={id} type="range" min={min} max={max} value={value} onInput={handleChange} />
+        </div>
+        <label for={id} className="active">{label}: {value}</label>
+      </Column>
+    );
+  }
+}
+
 class Talk extends React.Component {
   constructor(props) {
     super(props);
@@ -229,12 +280,7 @@ class Talk extends React.Component {
           <Row packed>
             <Input s5 label="Speaker Name" id={id('speaker_name')}/>
             <Input s5 label="Presentation Title" id={id('pres_title')}/>
-            <Column s2 className="input-field valign-wrapper">
-              <p className="range-field valign-wrapper">
-                <input id={id('length')} type="range" min="0" max="60" value="0" />
-              </p>
-              <label for={id('length')} className="active">Length (minutes)</label>
-            </Column>
+            <Range s2 label="Duration (mins)" id={id('length')} className="valign-wrapper" min="0" max="60" />
           </Row>
         </Card>
       </Row>
