@@ -252,7 +252,7 @@ class Talk extends React.Component {
       const activeClass = active ? 'green accent-1' : '';
       return (
         <Column s12 className={`card ${activeClass}`}>
-          <div className="card-content" style={{ overflow: 'hidden' }}>
+          <div className="card-content" style={{ overflow: 'hidden', padding: '24px 12px' }}>
             {children}
           </div>
         </Column>
