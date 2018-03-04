@@ -373,20 +373,24 @@ class Talk extends React.Component {
     const { id } = this;
 
     const isActive = active == num;
-    const setActiveState = isActive ? 'disabled' : '';
+    const canSetActive = isActive ? 'disabled' : '';
+    const canOverlay = isActive ? '' : 'disabled';
 
     return (
       <Row packed>
         <Card active={isActive}>
           <Row packed>
-            <Column s7>
+            <Column s4>
               <span className="card-title">
                 Talk #{num}
                 <a className="waves-effect waves-teal btn-flat red-text">Delete</a>
               </span>
             </Column>
             <Column s3 className="right-align">
-              <a className={`waves-effect waves-teal btn ${setActiveState}`} onClick={() => { replicant.value = num }}>Set as Active</a>
+              <a className={`waves-effect waves-teal btn ${canOverlay}`}>Show overlay</a>
+            </Column>
+            <Column s3 className="right-align">
+              <a className={`waves-effect waves-teal btn ${canSetActive}`} onClick={() => { replicant.value = num }}>Set as Active</a>
             </Column>
 
             <Switch s2 id={id('talkActive')} className="right-align" onLabel="Enable" offLabel="Disable" />
