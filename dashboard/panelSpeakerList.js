@@ -120,7 +120,8 @@ class ComplexReplicant {
 class Switch extends React.Component {
   constructor(props) {
     super(props);
-    console.log("switch constructor");
+
+    this.handleChange = this.handleChange.bind(this);
     this.state = { isChecked: false };
 
     if (props.id) {
@@ -153,21 +154,25 @@ class Switch extends React.Component {
     }
   }
 
-  render() {
+  handleChange({ target: { checked }}) {
     // set state indirectly (via replicant value, which in turn will set the value in state)
-    const handleChange = ({ target: { checked }}) => {
-      if (this.state.replicant) { this.state.replicant.value = checked }
-    };
+    if (this.state.replicant) {
+      this.state.replicant.value = checked
+    }
+  }
 
+  render() {
     const { isChecked } = this.state;
+    const { onLabel, offLabel } = this.props;
+
     return (
       <Column {...this.props}>
         <div className="switch">
           <label>
-            Hide
-            <input id="presenter_overlay_show" type="checkbox" onChange={handleChange} checked={isChecked} />
+            {offLabel}
+            <input id="presenter_overlay_show" type="checkbox" onChange={this.handleChange} checked={isChecked} />
             <span className="lever"></span>
-            Show
+            {onLabel}
           </label>
         </div>
       </Column>
@@ -182,6 +187,11 @@ class Switch extends React.Component {
     }
   }
 }
+
+Switch.defaultProps = {
+  offLabel: 'Hide',
+  onLabel: 'Show',
+};
 
 class Range extends React.Component {
   constructor(props) {
@@ -379,7 +389,7 @@ class Talk extends React.Component {
               <a className={`waves-effect waves-teal btn ${setActiveState}`} onClick={() => { replicant.value = num }}>Set as Active</a>
             </Column>
 
-            <Switch s2 id={id('talkActive')} className="right-align" />
+            <Switch s2 id={id('talkActive')} className="right-align" onLabel="Enable" offLabel="Disable" />
           </Row>
 
           <Row packed>
