@@ -46,7 +46,7 @@ class Input extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("input nextprops:", nextprops);
+    console.log("input nextprops:", nextProps);
     if (!this.props.replicant && nextProps.replicant) {
       //console.log("nextProps.replicant", nextProps.replicant);
       if (this.unsubscribe) {
@@ -90,7 +90,7 @@ class Input extends React.Component {
 
   componentWillUnmount() {
     if (this.unsubscribe) {
-      console.log(this.unsubscribe);
+      // console.log(this.unsubscribe);
       // remember to remove old event listener:
       this.unsubscribe();
     }
@@ -176,7 +176,7 @@ class Switch extends React.Component {
 
   componentWillUnmount() {
     if (this.unsubscribe) {
-      console.log(this.unsubscribe);
+      // console.log(this.unsubscribe);
       // remember to remove old event listener:
       this.unsubscribe();
     }
@@ -240,7 +240,7 @@ class Range extends React.Component {
 
   componentWillUnmount() {
     if (this.unsubscribe) {
-      console.log(this.unsubscribe);
+      // console.log(this.unsubscribe);
       // remember to remove old event listener:
       this.unsubscribe();
     }
@@ -312,17 +312,28 @@ class DatePicker extends React.Component {
 
   componentWillUnmount() {
     if (this.unsubscribe) {
-      console.log(this.unsubscribe);
+      // console.log(this.unsubscribe);
       // remember to remove old event listener:
       this.unsubscribe();
     }
   }
 }
 
+const Card = ({ children, active }) => {
+  const activeClass = active ? 'green accent-1' : '';
+  return (
+    <Column s12 className={`card ${activeClass}`}>
+      <div className="card-content" style={{ overflow: 'hidden', padding: '24px 12px' }}>
+        {children}
+      </div>
+    </Column>
+  );
+};
+
 class Talk extends React.Component {
   constructor(props) {
     super(props);
-    console.log("talk constructor");
+    console.warn("talk constructor");
     this.id = label => `${label}_${props.num}`;
 
     // replicant for tracking active/current:
@@ -354,17 +365,6 @@ class Talk extends React.Component {
     const isActive = active == num;
     const setActiveState = isActive ? 'disabled' : '';
 
-    const Card = ({ children, active }) => {
-      const activeClass = active ? 'green accent-1' : '';
-      return (
-        <Column s12 className={`card ${activeClass}`}>
-          <div className="card-content" style={{ overflow: 'hidden', padding: '24px 12px' }}>
-            {children}
-          </div>
-        </Column>
-      );
-    };
-
     return (
       <Row packed>
         <Card active={isActive}>
@@ -393,7 +393,7 @@ class Talk extends React.Component {
 
   componentWillUnmount() {
     if (this.unsubscribe) {
-      console.log(this.unsubscribe);
+      // console.log(this.unsubscribe);
       // remember to remove old event listener:
       this.unsubscribe();
     }
@@ -401,18 +401,23 @@ class Talk extends React.Component {
 }
 
 
-$(document).ready(() => ReactDOM.render((
+const SpeakerList = () => {
+  console.warn("render speakerlist");
+  return (
   <Row>
     <form className="col s12">
       <Row packed>
+        {/*
         <Input s8 label="Event Title" id="event_title"
           replicant={new ComplexReplicant({
-            replicant: nodecg.Replicant('event_title'),
+            replicant: nodecg.Replicant('event_title', { persist: true }),
             marshal: (repl, val) => { console.log("SENDING", val); repl.value = val },
-            unmarshal: (cb, val, a, b, c) => { console.log("GOT BACK", val);  cb(val); },
+            unmarshal: (cb, val, a, b, c) => { console.log("GOT BACK", val); cb(val); },
           })}/>
+          */}
 
-        <DatePicker s4 label="Event dateee" id="event_date" />
+        <Input s8 label="Event Title" id="event_title2" />
+        <DatePicker s4 label="Event date" id="event_date" />
       </Row>
 
       <Talk num='1' />
@@ -422,7 +427,10 @@ $(document).ready(() => ReactDOM.render((
 
     </form>
   </Row>
-  ),
+  );
+};
+
+$(document).ready(() => ReactDOM.render(
+  <SpeakerList />,
   document.getElementById('root')
 ));
-
