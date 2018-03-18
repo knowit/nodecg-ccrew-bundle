@@ -7,24 +7,26 @@ const Row = ({ children, valign, className = '', packed }) => {
 
 const Column = ({ s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, className, children }) => {
   const width =
-    s1 && "s1" ||
-    s2 && "s2" ||
-    s3 && "s3" ||
-    s4 && "s4" ||
-    s5 && "s5" ||
-    s6 && "s6" ||
-    s7 && "s7" ||
-    s8 && "s8" ||
-    s9 && "s9" ||
-    s10 && "s10" ||
-    s11 && "s11" ||
-    "s12";
+    s1 && "col s1" ||
+    s2 && "col s2" ||
+    s3 && "col s3" ||
+    s4 && "col s4" ||
+    s5 && "col s5" ||
+    s6 && "col s6" ||
+    s7 && "col s7" ||
+    s8 && "col s8" ||
+    s9 && "col s9" ||
+    s10 && "col s10" ||
+    s11 && "col s11" ||
+    s12 && "col s12";
+    // "input-field inline";
 
-  return (
+
+  return width ? (
     <div className={`col ${width} ${className||''}`}>
       {children}
     </div>
-  );
+  ) : <div style={{ display: 'inline-block' }}>{children}</div>;
 }
 
 class Input extends React.Component {
