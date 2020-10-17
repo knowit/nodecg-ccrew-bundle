@@ -18,7 +18,7 @@
     "nodecg-bundle"
   ],
   "nodecg": {
-    "compatibleRange": "^1.6.1",
+    "compatibleRange": "^1.7.1",
     "dashboardPanels": [
       {
         "name": "breakscreen",
